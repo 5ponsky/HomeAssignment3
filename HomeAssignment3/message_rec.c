@@ -7,10 +7,8 @@
 #define MSGSZ     128
 
 
-/*
- * Declare the message structure.
- */
 
+//Declare the message structure.
 typedef struct msgbuf {
     long    mtype;
     char    mtext[MSGSZ];
@@ -23,11 +21,9 @@ main()
     key_t key;
     message_buf  rbuf;
 
-    /*
-     * Get the message queue id for the
-     * "name" 1234, which was created by
-     * the server.
-     */
+    // Get the message queue id for the
+    // "name" 1234, which was created by
+    // the server.
     key = 1234;
 
     if ((msqid = msgget(key, 0666)) < 0) {
@@ -36,17 +32,13 @@ main()
     }
 
 
-    /*
-     * Receive an answer of message type 1.
-     */
+    // Receive an answer of message type 1.
     if (msgrcv(msqid, &rbuf, MSGSZ, 1, 0) < 0) {
         perror("msgrcv");
         exit(1);
     }
 
-    /*
-     * Print the answer.
-     */
+    // Print the answer.
     printf("%s\n", rbuf.mtext);
     exit(0);
 }
